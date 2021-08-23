@@ -1,5 +1,11 @@
-﻿<form asp-controller="Upload" asp-action="Index" method="post" enctype="multipart/form-data">
-    <input type="file" name="file" />
-    <hr />
-    <button type="submit">Upload</button>
+﻿@{ 
+    ViewData["Title"] = "Upload";
+}
+
+<form asp-controller="Upload" asp-action="Index" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="exampleFormControlFile1">Csv File Upload</label>
+        <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">
+    </div>
+    <button type="submit" class="btn btn-dark"><i class="fas fa-upload"></i> Upload</button>
 </form>
