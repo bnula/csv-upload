@@ -1,4 +1,6 @@
 using CsvImport.Data;
+using CsvImport.Mappings;
+using CsvImport.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,8 +29,12 @@ namespace CsvImport
         {
             services.AddControllersWithViews();
             services.AddDbContext<DataContext>(o =>
-                o.UseSqlServer("DefaultConnection")
+                o.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"))
             );
+            services.AddAutoMapper(typeof(Maps));
+
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
