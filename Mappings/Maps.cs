@@ -13,6 +13,7 @@ namespace CsvImport.Mappings
         public Maps()
         {
             CreateMap<Employee, EmployeeDto>().ReverseMap();
+            CreateMap<Employee, EmployeeVM>().ReverseMap();
         }
     }
 }

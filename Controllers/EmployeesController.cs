@@ -15,12 +15,12 @@ using System.Threading.Tasks;
 
 namespace CsvImport.Controllers
 {
-    public class UploadController : Controller
+    public class EmployeesController : Controller
     {
         private readonly IEmployeeRepository _repo;
         private readonly IMapper _mapper;
 
-        public UploadController(
+        public EmployeesController(
             IEmployeeRepository repo,
             IMapper mapper)
         {
@@ -29,13 +29,21 @@ namespace CsvImport.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> List()
+        {
+            var items = await _repo.FindAllAsync();
+            var model = _mapper.Map<IEnumerable<EmployeeVM>>(items);
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult Upload()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(IFormFile file, [FromServices] IWebHostEnvironment hostingEnv)
+        public async Task<IActionResult> Upload(IFormFile file, [FromServices] IWebHostEnvironment hostingEnv)
         {
             string fileName = $"{hostingEnv.WebRootPath}\\files\\{file.FileName}";
             using (FileStream fileStream = System.IO.File.Create(fileName))
@@ -81,6 +89,7 @@ namespace CsvImport.Controllers
         {
             foreach (var emp in employees)
             {
+                emp.ImportTime = DateTime.Now;
                 var success = await _repo.CreateAsync(emp);
                 if (!success)
                 {

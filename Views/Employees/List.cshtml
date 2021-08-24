@@ -1,0 +1,32 @@
+﻿@{ 
+    ViewBag.Title = "List Records";
+}  
+@model IEnumerable<EmployeeVM>
+
+<h1> @ViewBag.Title </h1>
+
+<div class="row">
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Jméno</th>
+                <th scope="col">Příjmení</th>
+                <th scope="col">Číslo zaměstnance</th>
+                <th scope="col">Oddělení </th>
+                <th scope="col">Čas Importu </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.FirstName</td>
+                    <td>@emp.LastName</td>
+                    <td>@emp.EmployeeId</td>
+                    <td>@emp.Department</td>
+                    <td>@emp.ImportTime</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

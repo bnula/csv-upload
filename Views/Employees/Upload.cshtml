@@ -1,8 +1,10 @@
 ﻿@{ 
-    ViewData["Title"] = "Upload";
+    ViewBag.Title = "Upload";
 }
 
-<form asp-controller="Upload" asp-action="Index" method="post" enctype="multipart/form-data">
+<h1> @ViewBag.Title </h1>
+
+<form asp-controller="Employees" asp-action="Upload" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="exampleFormControlFile1">Csv File Upload</label>
         <input type="file" name="file" class="form-control-file" id="exampleFormControlFile1">

@@ -61,7 +61,7 @@ namespace CsvImport
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Upload}/{action=Index}/{id?}");
+                    pattern: "{controller=Employees}/{action=Upload}/{id?}");
             });
         }
     }
